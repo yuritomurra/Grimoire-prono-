@@ -61,36 +61,6 @@
             padding: 16px;
         }
 
-        /* Tabs Navigation */
-        .nav-tabs {
-            display: flex;
-            background: var(--bg-card);
-            border-radius: 12px;
-            padding: 4px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border);
-        }
-
-        .tab-btn {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            padding: 10px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .tab-btn.active {
-            background: var(--emerald);
-            color: #000;
-            box-shadow: 0 4px 12px var(--emerald-glow);
-        }
-
-        /* Filter Pills */
         .filters {
             display: flex;
             gap: 8px;
@@ -121,14 +91,12 @@
             color: var(--emerald);
         }
 
-        /* Match Card */
         .match-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 16px;
             margin-bottom: 14px;
-            transition: transform 0.2s;
         }
 
         .match-header {
@@ -174,7 +142,6 @@
             font-weight: bold;
         }
 
-        /* Prediction Bar */
         .prediction-box {
             background: rgba(0, 0, 0, 0.3);
             border-radius: 10px;
@@ -210,7 +177,6 @@
             font-size: 0.9rem;
         }
 
-        /* Action Buttons */
         .card-actions {
             display: flex;
             gap: 8px;
@@ -224,7 +190,6 @@
             font-weight: 600;
             cursor: pointer;
             border: none;
-            transition: opacity 0.2s;
         }
 
         .btn-outline {
@@ -238,7 +203,6 @@
             color: #000;
         }
 
-        /* Bottom Navigation */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -277,7 +241,6 @@
             fill: currentColor;
         }
 
-        /* Views */
         .view-section {
             display: none;
         }
@@ -286,7 +249,6 @@
             display: block;
         }
 
-        /* Combiner Generator Box */
         .generator-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
@@ -322,7 +284,6 @@
             font-size: 0.9rem;
         }
 
-        /* Modal Analysis */
         .modal {
             display: none;
             position: fixed;
@@ -402,8 +363,6 @@
     </header>
 
     <div class="container">
-
-        <!-- VUE 1 : PRONOSTICS DU JOUR -->
         <div id="view-pronos" class="view-section active">
             <div class="filters">
                 <button class="filter-chip active" onclick="filterMatches('ALL')">Tous les matchs</button>
@@ -411,13 +370,9 @@
                 <button class="filter-chip" onclick="filterMatches('BTTS')">BTTS (Les 2 marquent)</button>
                 <button class="filter-chip" onclick="filterMatches('SECURE')">Indice > 85%</button>
             </div>
-
-            <div id="matches-list">
-                <!-- Injecté par JavaScript -->
-            </div>
+            <div id="matches-list"></div>
         </div>
 
-        <!-- VUE 2 : COMBINÉ SÛR -->
         <div id="view-combinee" class="view-section">
             <div class="generator-card">
                 <h3>⚡ Générateur de Combiné Sûr</h3>
@@ -439,13 +394,9 @@
                 </div>
                 <button class="btn btn-primary" style="width: 100%; padding: 12px; font-size: 0.95rem; margin-top: 8px;" onclick="generateSafeCombo()">Générer mon Combiné</button>
             </div>
-
-            <div id="combo-result">
-                <!-- Résultat du générateur -->
-            </div>
+            <div id="combo-result"></div>
         </div>
 
-        <!-- VUE 3 : MÉTHODOLOGIE -->
         <div id="view-stats" class="view-section">
             <div class="generator-card">
                 <h3>📊 Transparence de l'Algorithme</h3>
@@ -453,42 +404,23 @@
                     Grimoire'prono croise en temps réel la forme des 5 derniers matchs, la moyenne des buts à domicile/extérieur, les confrontations directes (H2H) et les tendances du marché pour identifier les "Value Bets".
                 </p>
                 <div class="stat-grid">
-                    <div class="stat-box">
-                        <span style="font-size:0.75rem; color:var(--text-muted)">Fiabilité Globale</span>
-                        <span class="stat-num">84.2%</span>
-                    </div>
-                    <div class="stat-box">
-                        <span style="font-size:0.75rem; color:var(--text-muted)">Matchs Analysés</span>
-                        <span class="stat-num">1,420</span>
-                    </div>
-                    <div class="stat-box">
-                        <span style="font-size:0.75rem; color:var(--text-muted)">Cote Moyenne Ticket</span>
-                        <span class="stat-num">3.45</span>
-                    </div>
-                    <div class="stat-box">
-                        <span style="font-size:0.75rem; color:var(--text-muted)">Indice de Risque</span>
-                        <span class="stat-num" style="color:var(--gold)">Faible</span>
-                    </div>
+                    <div class="stat-box"><span style="font-size:0.75rem; color:var(--text-muted)">Fiabilité</span><span class="stat-num">84.2%</span></div>
+                    <div class="stat-box"><span style="font-size:0.75rem; color:var(--text-muted)">Matchs</span><span class="stat-num">1,420</span></div>
                 </div>
             </div>
         </div>
-
     </div>
 
-    <!-- MODAL ANALYSE -->
     <div id="analysis-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="modal-title" style="font-size: 1rem; color: var(--emerald);">Analyse Détaillée</h3>
                 <button class="close-modal" onclick="closeModal()">✕</button>
             </div>
-            <div id="modal-body">
-                <!-- Contenu dynamique -->
-            </div>
+            <div id="modal-body"></div>
         </div>
     </div>
 
-    <!-- NAVIGATION BASSE -->
     <nav class="bottom-nav">
         <button class="nav-item active" onclick="switchView('pronos', this)">
             <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
@@ -506,26 +438,22 @@
 
     <script>
         const matchesData = [
-            { id: 1, league: "Premier League", home: "Arsenal", away: "Crystal Palace", type: "1X2", prediction: "Victoire Arsenal (1)", odd: 1.38, confidence: 91, h2h: "Arsenal domine les confrontations à l'Emirates", formHome: "4V 1N 0D", formAway: "1V 2N 2D", rationale: "Arsenal affiche une solidité défensive remarquable à domicile et rencontre une équipe en difficulté à l'extérieur." },
-            { id: 2, league: "Bundesliga", home: "Bayern Munich", away: "Fribourg", type: "BTTS", prediction: "Les deux équipes marquent (BTTS)", odd: 1.72, confidence: 86, h2h: "Matchs souvent ouverts avec beaucoup de buts", formHome: "4V 0N 1D", formAway: "3V 1N 1D", rationale: "Fribourg marque régulièrement en déplacement face aux blocs hauts, tandis que l'attaque bavaroise est intenable." },
-            { id: 3, league: "Liga", home: "Real Madrid", away: "Valencia", type: "1X2", prediction: "Real Madrid ou Nul (1X)", odd: 1.16, confidence: 94, h2h: "Invaincu à domicile face à Valence depuis 5 ans", formHome: "5V 0N 0D", formAway: "2V 1N 2D", rationale: "Le Real gère parfaitement ses matchs au Bernabéu. Sécurité maximale sur la double chance." },
-            { id: 4, league: "Serie A", home: "Inter Milan", away: "Torino", type: "1X2", prediction: "Victoire Inter Milan (1)", odd: 1.45, confidence: 89, h2h: "Inter souverain tactiquement", formHome: "4V 1N 0D", formAway: "2V 0N 3D", rationale: "L'Inter possède le milieu le plus régulier du championnat et s'impose face aux équipes du milieu de tableau." },
-            { id: 5, league: "Ligue 1", home: "Paris SG", away: "Lens", type: "BTTS", prediction: "Les deux équipes marquent (BTTS)", odd: 1.65, confidence: 82, h2h: "Lens trouve toujours la faille au Parc", formHome: "3V 2N 0D", formAway: "3V 1N 1D", rationale: "Défense parisienne parfois friable en transition, Lens exploite à merveille les contres." },
-            { id: 6, league: "Champions League", home: "Manchester City", away: "Dortmund", type: "1X2", prediction: "Victoire Manchester City (1)", odd: 1.32, confidence: 92, h2h: "City invaincu à l'Etihad en C1", formHome: "5V 0N 0D", formAway: "2V 2N 1D", rationale: "Machine à gagner à domicile, maîtrise totale du tempo et de la possession." }
+            { id: 1, league: "Premier League", home: "Arsenal", away: "Crystal Palace", type: "1X2", prediction: "Victoire Arsenal (1)", odd: 1.38, confidence: 91, h2h: "Arsenal domine à l'Emirates", formHome: "4V 1N 0D", formAway: "1V 2N 2D", rationale: "Solide à domicile." },
+            { id: 2, league: "Bundesliga", home: "Bayern Munich", away: "Fribourg", type: "BTTS", prediction: "Les deux équipes marquent", odd: 1.72, confidence: 86, h2h: "Matchs ouverts", formHome: "4V 0N 1D", formAway: "3V 1N 1D", rationale: "Attaque puissante." },
+            { id: 3, league: "Liga", home: "Real Madrid", away: "Valencia", type: "1X2", prediction: "Real Madrid ou Nul (1X)", odd: 1.16, confidence: 94, h2h: "Invaincu au Bernabéu", formHome: "5V 0N 0D", formAway: "2V 1N 2D", rationale: "Maîtrise totale." },
+            { id: 4, league: "Serie A", home: "Inter Milan", away: "Torino", type: "1X2", prediction: "Victoire Inter Milan (1)", odd: 1.45, confidence: 89, h2h: "Inter souverain", formHome: "4V 1N 0D", formAway: "2V 0N 3D", rationale: "Milieu très régulier." },
+            { id: 5, league: "Ligue 1", home: "Paris SG", away: "Lens", type: "BTTS", prediction: "Les deux équipes marquent", odd: 1.65, confidence: 82, h2h: "Lens accrocheur", formHome: "3V 2N 0D", formAway: "3V 1N 1D", rationale: "Contres rapides." },
+            { id: 6, league: "C1", home: "Manchester City", away: "Dortmund", type: "1X2", prediction: "Victoire Manchester City (1)", odd: 1.32, confidence: 92, h2h: "City intraitable", formHome: "5V 0N 0D", formAway: "2V 2N 1D", rationale: "Possession et pressing." }
         ];
-
-        let currentFilter = 'ALL';
 
         function renderMatches(filter = 'ALL') {
             const list = document.getElementById('matches-list');
             list.innerHTML = '';
-
             const filtered = matchesData.filter(m => {
                 if(filter === 'ALL') return true;
                 if(filter === 'SECURE') return m.confidence >= 90;
                 return m.type === filter;
             });
-
             filtered.forEach(m => {
                 const card = document.createElement('div');
                 card.className = 'match-card';
@@ -541,14 +469,14 @@
                     </div>
                     <div class="prediction-box">
                         <div class="pred-info">
-                            <span class="pred-label">Pronostic Recommandé</span>
+                            <span class="pred-label">Pronostic</span>
                             <span class="pred-value">${m.prediction}</span>
                         </div>
                         <div class="pred-odd">@${m.odd}</div>
                     </div>
                     <div class="card-actions">
-                        <button class="btn btn-outline" onclick="openAnalysis(${m.id})">🔍 Analyse complète</button>
-                        <button class="btn btn-primary" onclick="addToCombo(${m.id})">+ Ajouter au ticket</button>
+                        <button class="btn btn-outline" onclick="openAnalysis(${m.id})">🔍 Analyse</button>
+                        <button class="btn btn-primary" onclick="alert('Ajouté au combiné !')">+ Ticket</button>
                     </div>
                 `;
                 list.appendChild(card);
@@ -556,7 +484,6 @@
         }
 
         function filterMatches(type) {
-            currentFilter = type;
             document.querySelectorAll('.filter-chip').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             renderMatches(type);
@@ -565,11 +492,48 @@
         function switchView(viewName, btn) {
             document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
-
             document.getElementById('view-' + viewName).classList.add('active');
             btn.classList.add('active');
         }
 
         function openAnalysis(id) {
             const m = matchesData.find(item => item.id === id);
-            document.getElementById('modal-title').innerTe
+            document.getElementById('modal-title').innerText = `Analyse : ${m.home} vs ${m.away}`;
+            document.getElementById('modal-body').innerHTML = `
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;"><strong>H2H :</strong> ${m.h2h}</p>
+                <div class="stat-grid">
+                    <div class="stat-box"><span style="font-size:0.7rem; color:var(--text-muted)">Domicile</span><span class="stat-num" style="font-size:0.9rem">${m.formHome}</span></div>
+                    <div class="stat-box"><span style="font-size:0.7rem; color:var(--text-muted)">Extérieur</span><span class="stat-num" style="font-size:0.9rem">${m.formAway}</span></div>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-main); margin-top: 12px;"><strong>Analyse :</strong> ${m.rationale}</p>
+            `;
+            document.getElementById('analysis-modal').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('analysis-modal').classList.remove('active');
+        }
+
+        function generateSafeCombo() {
+            const count = parseInt(document.getElementById('combo-count').value);
+            const market = document.getElementById('combo-market').value;
+            let pool = matchesData.filter(m => market === 'ALL' || m.type === market);
+            pool.sort((a, b) => b.confidence - a.confidence);
+            const selected = pool.slice(0, count);
+            const totalOdd = selected.reduce((acc, m) => acc * m.odd, 1).toFixed(2);
+            document.getElementById('combo-result').innerHTML = `
+                <div class="generator-card" style="border-color: var(--emerald);">
+                    <h3 style="color: var(--emerald);">🎫 Combiné Validé (Cote : @${totalOdd})</h3>
+                    ${selected.map(m => `<div style="display: flex; justify-content: space-between; padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 0.85rem;"><span>${m.home} - ${m.away}</span><strong style="color: var(--gold);">@${m.odd}</strong></div>`).join('')}
+                    <button class="btn btn-primary" style="width: 100%; margin-top: 12px;" onclick="alert('Code copié !')">Copier le Code</button>
+                </div>
+            `;
+        }
+
+        window.onload = function() {
+            renderMatches('ALL');
+        };
+    </script>
+</body>
+    </html>
+            
